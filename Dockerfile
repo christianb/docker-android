@@ -5,17 +5,11 @@ LABEL maintainer "christianb.public@gmail.com"
 
 WORKDIR /home
 
-SHELL ["/bin/bash", "-c"]
-
-ENV ANDROID_HOME=/opt/android
-ENV PATH "$PATH:$GRADLE_HOME/bin:/opt/gradlew:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/tools/bin:$ANDROID_HOME/platform-tools:${ANDROID_NDK_HOME}:$ANDROID_HOME/build-tools/${ANDROID_BUILD_TOOLS_LEVEL}"
-ENV LD_LIBRARY_PATH "$ANDROID_HOME/emulator/lib64:$ANDROID_HOME/emulator/lib64/qt/lib"
-
 # To avoid "tzdata" asking for geographic area
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-  && apt-get install -y openjdk-8-jdk git unzip libglu1 libpulse-dev libasound2 libc6  libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxi6  libxtst6 libnss3 wget curl
+  && apt-get install -y openjdk-8-jdk git unzip wget curl
 
 # AppCenter CLI (from npm), https://docs.microsoft.com/en-us/appcenter/cli/ https://github.com/microsoft/appcenter-cli
 RUN apt-get install -y npm \
@@ -59,5 +53,9 @@ ARG ANDROID_SYSTEM_IMAGE=system-images;android-${ANDROID_API_LEVEL};google_apis;
 RUN /opt/android/cmdline-tools/tools/bin/sdkmanager --install "${ANDROID_SYSTEM_IMAGE}"
 
 # Create Emulator
-ARG EMULATOR_NAME=cli_emu
+ARG EMULATOR_NAME=emulator_${ANDROID_API_LEVEL}
 RUN /opt/android/cmdline-tools/tools/bin/avdmanager create avd -f -n ${EMULATOR_NAME} -b x86_64 -g google_apis -d "Nexus 5X" -c 128M -k "${ANDROID_SYSTEM_IMAGE}"
+
+ENV ANDROID_HOME=/opt/android
+ENV PATH "$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/${ANDROID_BUILD_TOOLS_LEVEL}"
+ENV LD_LIBRARY_PATH "$ANDROID_HOME/emulator/lib64:$ANDROID_HOME/emulator/lib64/qt/lib"
