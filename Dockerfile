@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 
 LABEL maintainer "christianb.public@gmail.com"
 
-WORKDIR /home/dev
+WORKDIR /home
 
 SHELL ["/bin/bash", "-c"]
 
@@ -15,12 +15,9 @@ ENV LD_LIBRARY_PATH "$ANDROID_HOME/emulator/lib64:$ANDROID_HOME/emulator/lib64/q
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-  && apt-get install -y openjdk-8-jdk git unzip libglu1 libpulse-dev libasound2 libc6  libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxi6  libxtst6 libnss3 wget
+  && apt-get install -y openjdk-8-jdk git unzip libglu1 libpulse-dev libasound2 libc6  libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxi6  libxtst6 libnss3 wget curl
 
-# TODO can curl be replaced by wget?
-RUN apt-get install -y curl
-
-# npm (needed for AppCenter), https://docs.microsoft.com/en-us/appcenter/cli/ https://github.com/microsoft/appcenter-cli
+# AppCenter CLI (from npm), https://docs.microsoft.com/en-us/appcenter/cli/ https://github.com/microsoft/appcenter-cli
 RUN apt-get install -y npm \
   && npm install appcenter-cli
 
