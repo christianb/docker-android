@@ -38,7 +38,7 @@ RUN mkdir /opt/android \
 RUN yes Y | /opt/android/cmdline-tools/tools/bin/sdkmanager --install "platform-tools" \
   && yes Y | /opt/android/cmdline-tools/tools/bin/sdkmanager --licenses
 
-# Platform
+# Platform, https://developer.android.com/studio/releases/platforms
 ARG ANDROID_API_LEVEL=29
 RUN yes Y | /opt/android/cmdline-tools/tools/bin/sdkmanager --install "platforms;android-${ANDROID_API_LEVEL}" \
   && yes Y | /opt/android/cmdline-tools/tools/bin/sdkmanager --licenses
