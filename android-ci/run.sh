@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker-compose run --rm android /bin/bash
+docker-compose run --rm android-ci /bin/bash

@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  android:
+  android-ci:
     # How to run the docker container in shell
     # docker-compose run --rm sensorberg /bin/bash
     build: .

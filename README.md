@@ -1,14 +1,16 @@
 # Docker Android CI
-This is a docker image containing all tools for Android to be used on a CI.
+These are docker images containing all tools for Android to be used on a CI. <br>
+The docker images are hosted on [DockerHub](https://hub.docker.com/repositories/sensorberg).
 
-This repository contains two Dockerfiles.
-* `android-base`: contains the minmal setup for Android.
-* `android-ci`: contains a setup required for a CI integration.
+The repository contains two Dockerfiles.
+* [android-base](https://hub.docker.com/repository/docker/sensorberg/android-base): contains the minmal setup for Android.
+* [android-ci](https://hub.docker.com/repository/docker/sensorberg/android-ci): depends on `android-base` and contains a setup required for a CI integration.
 
-# Upload new Image to DockerHub
-First you must build and tag the docker image: `docker build -t <DOCKER_ID_USER>/android-ci:<VERSION> .`
+### Build a new image
+To build and tag the a new docker image: `docker build -t sensorberg/android-ci:<VERSION> .`
 
-Then you can push the image: `docker push <DOCKER_ID_USER>/android-ci:<VERSION>`
+### Push image to DockerHub
+Push the image: `docker push sensorberg/android-ci:<VERSION>`
 
-# Local Testing
+### Local Testing
 Execute `docker-compose build` to build the image locally. Then execute `run.sh` to start the image.

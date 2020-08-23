@@ -1,10 +1,6 @@
 # Ubuntu 20.04 LTS: end of standard support: April 2025
 FROM ubuntu:20.04
 
-LABEL maintainer "christianb.public@gmail.com"
-
-WORKDIR /home
-
 # To avoid "tzdata" asking for geographic area
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -40,3 +36,5 @@ RUN /opt/android/cmdline-tools/tools/bin/sdkmanager --install "${ANDROID_SYSTEM_
 ENV ANDROID_HOME=/opt/android
 ENV PATH "$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/${ANDROID_BUILD_TOOLS_VERSION}"
 ENV LD_LIBRARY_PATH "$ANDROID_HOME/emulator/lib64:$ANDROID_HOME/emulator/lib64/qt/lib"
+
+WORKDIR /home
