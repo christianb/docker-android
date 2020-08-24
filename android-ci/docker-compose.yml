@@ -5,7 +5,5 @@ services:
     # How to run the docker container in shell
     # docker-compose run --rm sensorberg /bin/bash
     build: .
-    volumes:
-    - ${PATH_DEV}:/home
     stdin_open: true
     tty: true

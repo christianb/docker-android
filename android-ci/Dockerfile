@@ -1,8 +1,10 @@
 FROM sensorberg/android-base:0.1
 
 # AppCenter CLI (from npm), https://docs.microsoft.com/en-us/appcenter/cli/ https://github.com/microsoft/appcenter-cli
-RUN apt-get install -y npm \
-  && npm install appcenter-cli
+RUN apt-get update && apt-get install -y npm \
+  && npm install appcenter-cli \
+  && ln -s /home/node_modules/appcenter-cli/bin/appcenter.js /usr/local/bin/appcenter
+ENV PATH "$PATH:/usr/local/bin/"
 
 # envman (For cross tooling environment variable access), https://github.com/bitrise-io/envman/releases
 RUN wget $(echo "https://github.com/bitrise-io/envman/releases/download/2.3.0/envman-$(uname -s)-$(uname -m)") -P /usr/local/bin/ \
@@ -18,5 +20,3 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.c
 # Create Emulator
 ARG EMULATOR_NAME=emulator_${ANDROID_PLATFORM_VERSION}
 RUN /opt/android/cmdline-tools/tools/bin/avdmanager create avd -f -n ${EMULATOR_NAME} -b x86_64 -g google_apis -d "Nexus 5X" -c 128M -k "${ANDROID_SYSTEM_IMAGE}"
-
-WORKDIR /home
