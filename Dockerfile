@@ -40,7 +40,7 @@ ENV LD_LIBRARY_PATH "$ANDROID_HOME/emulator/lib64:$ANDROID_HOME/emulator/lib64/q
 
 # AppCenter CLI (from npm), https://docs.microsoft.com/en-us/appcenter/cli/ https://github.com/microsoft/appcenter-cli
 RUN apt-get update && apt-get install -y npm \
-  && npm install appcenter-cli
+  && npm install -g appcenter-cli
 
 # envman (For cross tooling environment variable access), https://github.com/bitrise-io/envman/releases
 RUN wget $(echo "https://github.com/bitrise-io/envman/releases/download/2.3.0/envman-$(uname -s)-$(uname -m)") -P /usr/local/bin/ \
