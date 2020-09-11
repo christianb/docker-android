@@ -7,3 +7,6 @@ To build and tag the a new docker image: `docker build -t sensorberg/android-ci:
 
 ### Push image to DockerHub
 Push the image: `docker push sensorberg/android-ci:<VERSION>`
+
+### Links
+* [Build a Lightweight Docker Container For Android Testing](https://medium.com/better-programming/build-a-lightweight-docker-container-for-android-testing-2aa6bdaea422) by Phát Phát
